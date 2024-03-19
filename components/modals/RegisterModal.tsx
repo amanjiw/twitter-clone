@@ -1,15 +1,18 @@
-import React, { useCallback, useState } from "react";
+import React, { useState, useCallback } from "react";
 
-import useLoginModal from "@/hooks/useLoginModal";
 import useRegisterModal from "@/hooks/useRegisterModal";
+import useLoginModal from "@/hooks/useLoginModal";
 
 import Input from "../Input";
 import Modal from "../Modal";
+import LoginModal from "./LoginModal";
 
-const LoginModal = () => {
-	const loginModal = useLoginModal();
+const RegisterModal = () => {
 	const registerModal = useRegisterModal();
+	const loginModal = useLoginModal();
 
+	const [username, setUsername] = useState("");
+	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
@@ -18,20 +21,20 @@ const LoginModal = () => {
 		try {
 			setIsLoading(true);
 
-			//TODO: add login
+			//TODO: add register and login
 
-			loginModal.onClose();
+			registerModal.onClose();
 		} catch (error) {
 			console.log(error);
 		}
-	}, [loginModal]);
+	}, [registerModal]);
 
 	const onToggle = useCallback(() => {
 		if (isLoading) return;
 
-		registerModal.onOpen();
-		loginModal.onClose();
-	}, [isLoading, registerModal, loginModal]);
+		registerModal.onClose();
+		loginModal.onOpen();
+	}, [isLoading, loginModal, registerModal]);
 
 	const bodyContent = (
 		<div className="flex flex-col gap-4">
@@ -39,6 +42,18 @@ const LoginModal = () => {
 				placeholder="E-mail"
 				onChange={(e) => setEmail(e.target.value)}
 				value={email}
+				disabled={isLoading}
+			/>
+			<Input
+				placeholder="Name"
+				onChange={(e) => setName(e.target.value)}
+				value={name}
+				disabled={isLoading}
+			/>
+			<Input
+				placeholder="Username"
+				onChange={(e) => setUsername(e.target.value)}
+				value={username}
 				disabled={isLoading}
 			/>
 			<Input
@@ -53,12 +68,12 @@ const LoginModal = () => {
 	const footerConttent = (
 		<div className="text-neutral-400 text-center mt-4">
 			<p>
-				First time using twitter?{" "}
+				Already have an account?{" "}
 				<span
 					onClick={onToggle}
 					className="text-white cursor-pointer hover:underline"
 				>
-					Create an account
+					Sign in
 				</span>
 			</p>
 		</div>
@@ -67,15 +82,15 @@ const LoginModal = () => {
 	return (
 		<Modal
 			disabled={isLoading}
-			isOpen={loginModal.isOpen}
-			onClose={loginModal.onClose}
+			isOpen={registerModal.isOpen}
+			onClose={registerModal.onClose}
 			onSubmit={onSubmit}
-			actionLabel="sign in"
-			title="Login"
+			title="Create an account"
+			actionLabel="Register"
 			body={bodyContent}
 			footer={footerConttent}
 		/>
 	);
 };
 
-export default LoginModal;
+export default RegisterModal;
