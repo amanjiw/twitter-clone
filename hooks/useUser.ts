@@ -14,3 +14,6 @@ const useUser = (userId: string) => {
 		mutate,
 	};
 };
+
+
+export default useUser
