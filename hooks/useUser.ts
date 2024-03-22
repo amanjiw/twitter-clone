@@ -3,7 +3,7 @@ import useSWR from "swr";
 
 const useUser = (userId: string) => {
 	const { data, error, isLoading, mutate } = useSWR(
-		userId ? `/api/${userId}` : null,
+		userId ? `/api/users/${userId}` : null,
 		fetcher
 	);
 
