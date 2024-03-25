@@ -27,7 +27,7 @@ const Sidebar: React.FC<SidebarProps> = ({}) => {
 		},
 		{
 			label: "Profile",
-			href: `/user/123`,
+			href: `/user/${currentuser?.id}`,
 			icon: FaUser,
 			auth: true,
 		},
@@ -48,7 +48,7 @@ const Sidebar: React.FC<SidebarProps> = ({}) => {
 								auth={item.auth}
 							/>
 						);
- 					})}
+					})}
 					{currentuser && (
 						<SidebarItem
 							onClick={() => signOut()}
