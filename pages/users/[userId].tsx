@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import PostFeed from "@/components/posts/PostFeed";
 import UserBio from "@/components/users/UserBio";
 import UserHero from "@/components/users/UserHero";
 import useUser from "@/hooks/useUser";
@@ -28,6 +29,7 @@ const UserView = () => {
 			/>
 
 			<UserBio user={fetchedUser} />
+			<PostFeed userId={router.query.userId as string} />
 		</div>
 	);
 };

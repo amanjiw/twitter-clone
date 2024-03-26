@@ -28,11 +28,14 @@ const PostItem: React.FC<PostItemProps> = ({ data, userId }) => {
 		router.push(`/posts/${data.id}`);
 	}, [router, data.id]);
 
-	const onLike = useCallback((event: any) => {
-		event.stopPropagation();
+	const onLike = useCallback(
+		(event: any) => {
+			event.stopPropagation();
 
-		loginModal.onOpen();
-	}, [loginModal]);
+			loginModal.onOpen();
+		},
+		[loginModal]
+	);
 
 	const createdAt = useMemo(() => {
 		if (!data?.createdAt) return null;
