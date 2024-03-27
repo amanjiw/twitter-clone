@@ -21,12 +21,12 @@ const PostItem: React.FC<PostItemProps> = ({ data, userId }) => {
 			event.stopPropagation();
 			router.push(`/users/${data.user.id}`);
 		},
-		[router, data.user]
+		[router, data?.user]
 	);
 
 	const goToPost = useCallback(() => {
-		router.push(`/posts/${data.id}`);
-	}, [router, data.id]);
+		router.push(`/posts/${data?.id}`);
+	}, [router, data?.id]);
 
 	const onLike = useCallback(
 		(event: any) => {
